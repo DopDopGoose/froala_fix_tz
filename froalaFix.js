@@ -21,8 +21,8 @@ class Coords {
 
 class Tests {
     /**
-     * @param size {Size}
-     * @param coords {Coords}
+     * @param {Size} size
+     * @param {Coords} coords
      * @returns {void}
      */
     static createSquare(size, coords) {
