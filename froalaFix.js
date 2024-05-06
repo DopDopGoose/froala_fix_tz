@@ -105,7 +105,7 @@ class PopupFixListeners {
     static fix_popup_pos_listener() {
         //В фулл скрине с попапом ничего не делаем и он появляется под кнопкой линка
         if (PopupFix.is_full_screen === true) return;
-        
+
         var insert_link_btn = PopupFix.insert_link_btn;
         //попап с инсертом линка и текста, до нажатия на кнопку линка, он не появляется. После нажатия
         //его можно получить по editor.popups.get("link.insert");
@@ -158,4 +158,8 @@ class PopupFix {
     }
 }
 
+/**
+ * Активируем плагин одной коммандой
+ * Все выше выносим в отдельный файл
+ */
 PopupFix.activate()
