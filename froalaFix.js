@@ -19,31 +19,6 @@ class Coords {
     }
 }
 
-class Tests {
-    /**
-     * @param {Size} size
-     * @param {Coords} coords
-     * @returns {void}
-     */
-    static createSquare(size, coords) {
-        console.log(coords);
-        console.log(coords.offset_x, coords.offset_y);
-        const square = document.createElement("div");
-        square.style.backgroundColor = "blue";
-        square.id = "square22";
-        square.style.zIndex = 99999999999;
-
-        square.style.width = size.width + "px";
-        square.style.height = size.height + "px";
-
-        square.style.position = "absolute";
-        square.style.left = coords.offset_x + "px";
-        square.style.top = coords.offset_y + "px";
-
-        document.body.appendChild(square);
-    }
-}
-
 class PositionAndSize {
     constructor(element) {
         this.element = element;
