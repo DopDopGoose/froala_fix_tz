@@ -45,27 +45,16 @@ class Tests {
 }
 
 class PositionAndSize {
+    constructor(element) {
+        this.element = element;
+    }
+    get size() { return PositionAndSize.getElementSize(this.element); }
+    get coords() { return PositionAndSize.getElementCurrentCoords(this.element); }
+
     static getElementSize(element) {
         const width = element.clientWidth;
         const height = element.clientHeight;
         return new Size(width, height);
-    }
-    
-    static getElementAbsolutePosition(element) {
-        const rect = element.getBoundingClientRect();
-        const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const { top, left } = rect;
-        return new Coords((left + scrollLeft), (top + scrollTop));
-    }
-
-    static getElementAbsoluteCoords($element) {
-        const offset = $element.offset();
-        const scrollLeft = $(document).scrollLeft();
-        const scrollTop = $(document).scrollTop();
-        const absoluteLeft = offset.left + scrollLeft;
-        const absoluteTop = offset.top + scrollTop;
-        return { left: absoluteLeft, top: absoluteTop };
     }
 
     static getElementCurrentCoords(element) {
@@ -81,23 +70,11 @@ class PositionAndSize {
      * @example
      * var element = document.querySelector('#elem_id');
      * PositionAndSize.changeElementCoords(element, new Coords(100, 100));
-     * console.log(PositionAndSize.getElementAbsoluteCoords(element));
+     * console.log(PositionAndSize.getElementCurrentCoords(element));
      */
     static changeElementCoords(element, coords) {
         element.style.top = coords.offset_y + "px";
         element.style.left = coords.offset_x + "px";
-    }
-
-    constructor(element) {
-        this.element = element;
-    }
-
-    get size() {
-        return PositionAndSize.getElementSize(this.element);
-    }
-
-    get coords() {
-        return PositionAndSize.getElementCurrentCoords(this.element);
     }
 }
 
