@@ -103,10 +103,12 @@ class PositionAndSize {
 
 class PopupFixListeners {
     static fix_popup_pos_listener() {
+        //В фулл скрине с попапом ничего не делаем и он появляется под кнопкой линка
         if (PopupFix.is_full_screen === true) return;
+        
+        var insert_link_btn = PopupFix.insert_link_btn;
         //попап с инсертом линка и текста, до нажатия на кнопку линка, он не появляется. После нажатия
         //его можно получить по editor.popups.get("link.insert");
-        var insert_link_btn = PopupFix.insert_link_btn;
         var insert_link_popup = PopupFix.editor.popups.get("link.insert");
 
         var link_btn_size = PositionAndSize.getElementSize(insert_link_btn[0]);
@@ -120,23 +122,27 @@ class PopupFixListeners {
 }
 
 class PopupFix {
+    //Статика для более удобного доступа
     static editor = null;
     static insert_link_btn = null;
     static is_full_screen = false;
+    //Статика для более удобного доступа
 
 
     static _addListeners(editor) {
-        PopupFix.editor = editor; //Обьект эдитора
-        PopupFix.insert_link_btn = $(editor.$tb.find('.fr-command[data-cmd="insertLink"]')); //Кнопка добавления линка на текст или картинку
-        
-        console.log("INSERT_LINK_BTN: ", PopupFix.insert_link_btn);
+        //Обьект эдитора
+        PopupFix.editor = editor;
+        //Кнопка добавления линка в тулбаре
+        PopupFix.insert_link_btn = $(editor.$tb.find('.fr-command[data-cmd="insertLink"]'));
 
-        editor.events.on("commands.after", function(cmd) { // Читаем чо там юзер жмет и если жмет на инсерт линк, то делаем дела
-            console.log("COMMAND", cmd);
+        // Читаем чо там юзер жмет и если жмет на инсерт линк, то делаем дела
+        editor.events.on("commands.after", function(cmd) 
+        { 
             if (cmd === "insertLink") {
                  PopupFixListeners.fix_popup_pos_listener(); 
             }
             if (cmd === "fullscreen") {
+                //В фулл скрине с попапом ничего не делаем и он появляется под кнопкой линка
                 PopupFix.is_full_screen = !PopupFix.is_full_screen;
             }
         });
