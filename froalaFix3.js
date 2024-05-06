@@ -1,6 +1,6 @@
 
 FroalaEditor.PLUGINS.insertPopupFix = function(editor) { 
-    let isFullScreen = false;
+    let isFullScreen;
 
     function getElementSize(element) {
         const width = element.clientWidth;
@@ -26,7 +26,6 @@ FroalaEditor.PLUGINS.insertPopupFix = function(editor) {
     function _init() { 
         editor.events.on("commands.after", function(cmd) 
         { 
-            console.log("3", cmd);
             switch (cmd) {
                 case "insertLink":
                     fixPopupPosListener(editor);
@@ -34,8 +33,6 @@ FroalaEditor.PLUGINS.insertPopupFix = function(editor) {
                 case "fullscreen":
                     isFullScreen = !isFullScreen;
                     break
-                default:
-                    break;
             }
         });
     }
